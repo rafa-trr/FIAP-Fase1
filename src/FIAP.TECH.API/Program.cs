@@ -1,11 +1,19 @@
+using FIAP.TECH.API.Configurations;
+using FIAP.TECH.CORE.APPLICATION;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// Add Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Add methods extensions
+builder.Services.AddInjectionApplication();
+
+// Add DbContext
+builder.Services.ConfigureDbContext();
 
 var app = builder.Build();
 
@@ -18,6 +26,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
