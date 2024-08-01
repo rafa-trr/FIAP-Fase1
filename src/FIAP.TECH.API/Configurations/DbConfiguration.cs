@@ -11,5 +11,6 @@ public static class DbConfiguration
 
         var connection = configuration.GetConnectionString("ConnectionString");
         services.AddDbContext<AppDbContext>((opt) => opt.UseSqlServer(connection), ServiceLifetime.Scoped);
+
     }
 }

@@ -12,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add methods extensions
-builder.Services.AddInjectionApplication();
+builder.Services.AddInjectionApplication(builder.Configuration);
 
 // Add DbContext
 builder.Services.ConfigureDbContext();

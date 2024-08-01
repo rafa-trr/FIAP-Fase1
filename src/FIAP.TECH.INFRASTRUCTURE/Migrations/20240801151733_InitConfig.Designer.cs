@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FIAP.TECH.INFRASTRUCTURE.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240729160620_CreatedEntities")]
-    partial class CreatedEntities
+    [Migration("20240801151733_InitConfig")]
+    partial class InitConfig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,10 @@ namespace FIAP.TECH.INFRASTRUCTURE.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("DDD")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -71,11 +75,15 @@ namespace FIAP.TECH.INFRASTRUCTURE.Migrations
 
                     b.Property<string>("DDD")
                         .IsRequired()
-                        .HasColumnType("varchar(3)");
+                        .HasColumnType("varchar(2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(50)");
+
+                    b.Property<string>("UF")
+                        .IsRequired()
+                        .HasColumnType("varchar(2)");
 
                     b.HasKey("Id");
 
@@ -116,7 +124,7 @@ namespace FIAP.TECH.INFRASTRUCTURE.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 29, 13, 6, 20, 478, DateTimeKind.Local).AddTicks(2410),
+                            CreatedDate = new DateTime(2024, 8, 1, 12, 17, 33, 279, DateTimeKind.Local).AddTicks(3613),
                             Email = "tester@fiaptest.com.br",
                             IsActive = true,
                             Name = "Tech Challenge Fase1",
