@@ -11,4 +11,5 @@ public interface IRepository<T> where T : BaseEntity
     Task<T?> GetById(int id);
     Task<IEnumerable<T>> GetAll();
     Task<bool> Exists(Expression<Func<T, bool>> expression);
+    Task<T> Search(Expression<Func<T, bool>> expression);
 }

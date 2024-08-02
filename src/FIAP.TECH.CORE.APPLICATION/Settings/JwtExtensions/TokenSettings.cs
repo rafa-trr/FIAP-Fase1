@@ -1,4 +1,4 @@
-﻿namespace FIAP.TECH.CORE.APPLICATION.Settings;
+﻿namespace FIAP.TECH.CORE.APPLICATION.Settings.JwtExtensions;
 
 public class TokenSettings
 {

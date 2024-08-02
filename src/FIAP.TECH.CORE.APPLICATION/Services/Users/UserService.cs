@@ -1,5 +1,5 @@
 ﻿using FIAP.TECH.CORE.APPLICATION.Authentication;
-using FIAP.TECH.CORE.APPLICATION.Settings;
+using FIAP.TECH.CORE.APPLICATION.Settings.JwtExtensions;
 using FIAP.TECH.CORE.DOMAIN.Entities;
 using FIAP.TECH.CORE.DOMAIN.Interfaces.Repositories;
 using Microsoft.Extensions.Options;

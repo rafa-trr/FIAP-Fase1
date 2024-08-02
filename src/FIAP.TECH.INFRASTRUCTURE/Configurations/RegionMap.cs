@@ -13,6 +13,7 @@ internal class RegionMap : IEntityTypeConfiguration<Region>
         builder.Property(x => x.Id).UseIdentityColumn().IsRequired();
         builder.Property(x => x.CreatedDate).HasColumnType("datetime").IsRequired();
         builder.Property(x => x.Name).HasColumnType("varchar(50)").IsRequired();
-        builder.Property(x => x.DDD).HasColumnType("varchar(3)").IsRequired();
+        builder.Property(x => x.DDD).HasColumnType("varchar(2)").IsRequired();
+        builder.Property(x => x.UF).HasColumnType("varchar(2)").IsRequired();
     }
 }
