@@ -1,5 +1,5 @@
 ﻿using FIAP.TECH.CORE.APPLICATION.DTO;
-using FIAP.TECH.CORE.APPLICATION.Services;
+using FIAP.TECH.CORE.APPLICATION.Services.Contacts;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,29 +18,43 @@ public class ContactController : ControllerBase
         _contactService = contactService;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Post(ContactDto contactDTO)
-    {
-        try
-        {
-            await _contactService.CreateAsync(contactDTO);
-            return Ok();
-        }
-        catch (ValidationException ex)
-        {
-            return BadRequest(ex.Message);
-        }
-    }
-
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
         return Ok(await _contactService.GetAll());
     }
 
-    [HttpGet("{ddd}")]
+    [HttpGet("get-by-region/{ddd}")]
     public async Task<IActionResult> GetByDdd([FromRoute] string ddd)
     {
         return Ok(await _contactService.GetByDdd(ddd));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Post(ContactInsertDto contactDTO)
+    {
+        try
+        {
+            await _contactService.Create(contactDTO);
+            return Ok(new {message = "Contato criado com sucesso."});
+        }
+        catch (ValidationException vex)
+        {
+            return BadRequest(new { errors = vex.Errors.Select(e => e.ErrorMessage) });
+        }
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete([FromRoute] int id)
+    {
+        try
+        {
+            await _contactService.Delete(id);
+            return Ok(new { message = "Contato deletado com sucesso." });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { error = ex.Message });
+        }
     }
 }

@@ -6,7 +6,7 @@ using FIAP.TECH.CORE.DOMAIN.Validation;
 using FluentValidation;
 using FluentValidation.Results;
 
-namespace FIAP.TECH.CORE.APPLICATION.Services;
+namespace FIAP.TECH.CORE.APPLICATION.Services.Contacts;
 
 public class ContactService : IContactService
 {
@@ -23,26 +23,41 @@ public class ContactService : IContactService
         _contactRepository = contactRepository;
     }
 
-    public async Task CreateAsync(ContactDto contactDTO)
+    public async Task Create(ContactInsertDto contactInsertDTO)
     {
-        Contact contact = _mapper.Map<Contact>(contactDTO);
+        Contact contact = _mapper.Map<Contact>(contactInsertDTO);
 
         //Valida se os dados estao corretos
-        var resultValidation = new ContactValidation(_regionRepository);
+        var resultValidation = new ContactInsertValidation(_regionRepository);
         ValidationResult results = await resultValidation.ValidateAsync(contact);
 
         if (results.Errors.Any())
             throw new ValidationException(results.Errors);
 
-        Region region = await _regionRepository.Search(x => x.DDD == contact.DDD);
-        contact.RegionId = region.Id;
+        var region = await _regionRepository.Search(x => x.DDD == contact.DDD);
+        contact.RegionId = region!.Id;
 
         await _contactRepository.Create(contact);
+    }
+
+    public async Task Delete(int id)
+    {
+        var contact = await _contactRepository.GetById(id);
+
+        if (contact is null)
+            throw new InvalidOperationException("Contato com o ID informado não existe.");
+
+        await _contactRepository.Delete(contact);
     }
 
     public async Task<IEnumerable<ContactDto>> GetAll()
     {
         return _mapper.Map<IEnumerable<ContactDto>>(await _contactRepository.GetAll());
+    }
+
+    public async Task<ContactDto> GetById(int id)
+    {
+        return _mapper.Map<ContactDto>(await _contactRepository.GetById(id));
     }
 
     public async Task<IEnumerable<ContactDetailsDto>> GetByDdd(string ddd)

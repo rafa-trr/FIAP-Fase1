@@ -8,8 +8,10 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<Contact, ContactDto>().ReverseMap();
+        CreateMap<ContactInsertDto, Contact>();
+        CreateMap<Contact, ContactDto>();
         CreateMap<Contact, ContactDetailsDto>();
+
         CreateMap<Region, RegionDetailsDto>();
     }
 }

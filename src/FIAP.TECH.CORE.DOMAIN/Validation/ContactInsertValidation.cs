@@ -4,9 +4,9 @@ using FluentValidation;
 
 namespace FIAP.TECH.CORE.DOMAIN.Validation;
 
-public class ContactValidation : AbstractValidator<Contact>
+public class ContactInsertValidation : AbstractValidator<Contact>
 {
-    public ContactValidation(IRegionRepository _regionRepository)
+    public ContactInsertValidation(IRegionRepository _regionRepository)
     {
         #region Atributos
         RuleFor(c => c.Name)
