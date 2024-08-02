@@ -9,7 +9,7 @@ namespace FIAP.TECH.INFRASTRUCTURE.Repositories;
 public class Repository<T> : IRepository<T> where T : BaseEntity
 {
     private readonly AppDbContext _appDbContext;
-    private readonly DbSet<T> DbSet;
+    protected readonly DbSet<T> DbSet;
 
     public Repository(AppDbContext appDbContext)
     {
@@ -30,6 +30,10 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
     public async Task<bool> Exists(Expression<Func<T, bool>> expression)
     {
         return await DbSet.AnyAsync(expression);
+    }
+    public async Task<T> Search(Expression<Func<T, bool>> expression)
+    {
+        return await DbSet.FirstOrDefaultAsync(expression);
     }
 
     public async Task Create(T entity)
