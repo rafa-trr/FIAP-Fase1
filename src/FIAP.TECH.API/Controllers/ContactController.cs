@@ -1,11 +1,13 @@
 ﻿using FIAP.TECH.CORE.APPLICATION.DTO;
 using FIAP.TECH.CORE.APPLICATION.Services;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FIAP.TECH.API.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("/[controller]")]
     public class ContactController : ControllerBase
     {

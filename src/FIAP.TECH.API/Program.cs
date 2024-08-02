@@ -1,5 +1,7 @@
 using FIAP.TECH.API.Configurations;
 using FIAP.TECH.CORE.APPLICATION;
+using FIAP.TECH.CORE.APPLICATION.Settings.JwtExtensions;
+using FIAP.TECH.CORE.APPLICATION.Settings.Swagger;
 using FIAP.TECH.INFRASTRUCTURE.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +15,11 @@ builder.Services.AddSwaggerGen();
 
 // Add methods extensions
 builder.Services.AddInjectionApplication(builder.Configuration);
+
+builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
+builder.Services.AddSecurity();
+builder.Services.AddSwaggerConfgi();
+
 
 // Add DbContext
 builder.Services.ConfigureDbContext();

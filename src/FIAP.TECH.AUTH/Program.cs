@@ -2,7 +2,7 @@ using FIAP.TECH.AUTH.Configurations;
 using FIAP.TECH.CORE.APPLICATION;
 using FIAP.TECH.CORE.APPLICATION.Authentication;
 using FIAP.TECH.CORE.APPLICATION.Services.Users;
-using FIAP.TECH.CORE.APPLICATION.Settings;
+using FIAP.TECH.CORE.APPLICATION.Settings.JwtExtensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +17,7 @@ builder.Services.AddInjectionApplication(builder.Configuration);
 // Add DbContext
 builder.Services.ConfigureDbContext();
 
-builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
+builder.Services.AddSecurity();
 
 var app = builder.Build();
 
