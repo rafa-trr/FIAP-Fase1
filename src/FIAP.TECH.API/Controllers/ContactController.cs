@@ -4,33 +4,43 @@ using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FIAP.TECH.API.Controllers
+namespace FIAP.TECH.API.Controllers;
+
+[ApiController]
+[Authorize]
+[Route("[controller]")]
+public class ContactController : ControllerBase
 {
-    [ApiController]
-    [Authorize]
-    [Route("/[controller]")]
-    public class ContactController : ControllerBase
+    private readonly IContactService _contactService;
+
+    public ContactController(IContactService contactService)
     {
-        private readonly IContactService _contactService;
+        _contactService = contactService;
+    }
 
-        public ContactController(IContactService contactService)
+    [HttpPost]
+    public async Task<IActionResult> Post(ContactDto contactDTO)
+    {
+        try
         {
-            _contactService = contactService;
+            await _contactService.CreateAsync(contactDTO);
+            return Ok();
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Post(ContactDTO contactDTO)
+        catch (ValidationException ex)
         {
-            try
-            {
-                await _contactService.CreateAsync(contactDTO);
-                return Ok();
-            }
-            catch (ValidationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
+            return BadRequest(ex.Message);
         }
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        return Ok(await _contactService.GetAll());
+    }
+
+    [HttpGet("{ddd}")]
+    public async Task<IActionResult> GetByDdd([FromRoute] string ddd)
+    {
+        return Ok(await _contactService.GetByDdd(ddd));
     }
 }

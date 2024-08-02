@@ -1,6 +1,6 @@
 ﻿namespace FIAP.TECH.CORE.APPLICATION.DTO
 {
-    public class ContactDTO
+    public class ContactDto
     {
         public required string Name { get; set; }
         public required string Email { get; set; }

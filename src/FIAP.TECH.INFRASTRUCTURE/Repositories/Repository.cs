@@ -31,7 +31,8 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         return await DbSet.AnyAsync(expression);
     }
-    public async Task<T> Search(Expression<Func<T, bool>> expression)
+
+    public async Task<T?> Search(Expression<Func<T, bool>> expression)
     {
         return await DbSet.FirstOrDefaultAsync(expression);
     }

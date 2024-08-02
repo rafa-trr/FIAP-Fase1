@@ -2,33 +2,32 @@
 using FIAP.TECH.CORE.DOMAIN.Interfaces.Repositories;
 using FluentValidation;
 
-namespace FIAP.TECH.CORE.DOMAIN.Validation
+namespace FIAP.TECH.CORE.DOMAIN.Validation;
+
+public class ContactValidation : AbstractValidator<Contact>
 {
-    public class ContactValidation : AbstractValidator<Contact>
+    public ContactValidation(IRegionRepository _regionRepository)
     {
-        public ContactValidation(IRegionRepository _regionRepository)
+        #region Atributos
+        RuleFor(c => c.Name)
+            .NotEmpty()
+            .WithMessage("O campo {PropertyName} precisa ser fornecido.");
+
+        RuleFor(c => c.Email)
+            .EmailAddress()
+            .NotEmpty()
+            .WithMessage("O campo {PropertyName} deve ser preenchido corretamente.");
+
+        RuleFor(c => c.PhoneNumber)
+            .NotEmpty()
+            .NotNull().WithMessage("O campo {PropertyName} é obrigatório.")
+            .Length(8, 9)
+            .WithMessage("O campo {PropertyName} precisa ser fornecido entre 8 e 9 dígitos.");
+
+        RuleFor(x => x.DDD).MustAsync( async (DDD, CancellationToken) =>
         {
-            #region Atributos
-            RuleFor(c => c.Name)
-                .NotEmpty()
-                .WithMessage("O campo {PropertyName} precisa ser fornecido.");
-
-            RuleFor(c => c.Email)
-                .EmailAddress()
-                .NotEmpty()
-                .WithMessage("O campo {PropertyName} deve ser preenchido correto.");
-
-            RuleFor(c => c.PhoneNumber)
-                .NotEmpty()
-                .Length(8, 9)
-                .WithMessage("O campo {PropertyName} precisa ser fornecido entre 8 e 9.");
-
-
-            RuleFor(x => x.DDD).Must((DDD) =>
-            {
-                return _regionRepository.Exists(x => x.DDD == DDD).Result; ;
-            }).WithMessage("DDD invalido.");
-            #endregion
-        }
+            return await _regionRepository.Exists(x => x.DDD == DDD);
+        }).WithMessage("DDD inválido.");
+        #endregion
     }
 }

@@ -1,9 +1,10 @@
 ﻿using FIAP.TECH.CORE.APPLICATION.DTO;
 
-namespace FIAP.TECH.CORE.APPLICATION.Services
+namespace FIAP.TECH.CORE.APPLICATION.Services;
+
+public interface IContactService
 {
-    public interface IContactService
-    {
-        Task CreateAsync(ContactDTO contactDTO);
-    }
+    Task CreateAsync(ContactDto contactDTO);
+    Task<IEnumerable<ContactDto>> GetAll();
+    Task<IEnumerable<ContactDetailsDto>> GetByDdd(string ddd);
 }
