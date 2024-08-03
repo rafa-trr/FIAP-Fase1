@@ -4,9 +4,7 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "fiap.tech.api": "StartDebugging",
-        "fiap.tech.ui": "StartDebugging",
-        "fiap.tech.auth": "StartDebugging"
+        "SqlServerDb": "StartWithoutDebugging"
       }
     }
   }
