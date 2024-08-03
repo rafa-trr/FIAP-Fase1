@@ -1,4 +1,4 @@
-﻿using FIAP.TECH.CORE.APPLICATION.Services;
+﻿using FIAP.TECH.CORE.APPLICATION.Services.Contacts;
 using FIAP.TECH.CORE.APPLICATION.Services.Users;
 using FIAP.TECH.CORE.APPLICATION.Settings.AutoMapper;
 using FIAP.TECH.CORE.DOMAIN.Interfaces.Repositories;

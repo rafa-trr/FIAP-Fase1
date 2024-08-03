@@ -31,7 +31,8 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         return await DbSet.AnyAsync(expression);
     }
-    public async Task<T> Search(Expression<Func<T, bool>> expression)
+
+    public async Task<T?> Search(Expression<Func<T, bool>> expression)
     {
         return await DbSet.FirstOrDefaultAsync(expression);
     }
@@ -42,14 +43,10 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
         await _appDbContext.SaveChangesAsync();
     }
 
-    public async Task Delete(int id)
+    public async Task Delete(T entity)
     {
-        var entity = await GetById(id);
-        if (entity is not null)
-        {
-            DbSet.Remove(entity);
-            await _appDbContext.SaveChangesAsync();
-        }
+        DbSet.Remove(entity);
+        await _appDbContext.SaveChangesAsync();
     }
 
     public async Task Update(T entity)

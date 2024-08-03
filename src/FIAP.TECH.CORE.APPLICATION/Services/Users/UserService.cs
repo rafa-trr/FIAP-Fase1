@@ -27,12 +27,12 @@ public class UserService : IUserService
 
         if (user is null) return null;
 
-        var token = await generateJwtToken(user);
+        var token = await GenerateJwtToken(user);
 
         return new AuthenticateResponse(user, token);
     }
 
-    private async Task<string> generateJwtToken(User user)
+    private async Task<string> GenerateJwtToken(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var token = await Task.Run(() =>
