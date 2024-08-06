@@ -14,6 +14,7 @@ public class ContactRepository : Repository<Contact>, IContactRepository
     public async Task<IEnumerable<Contact>> GetByDdd(string ddd)
     {
         return await _appDbContext.Contacts
+            .AsNoTracking()
             .Include(c => c.Region)
             .Where(c => c.DDD == ddd)
             .ToListAsync();
