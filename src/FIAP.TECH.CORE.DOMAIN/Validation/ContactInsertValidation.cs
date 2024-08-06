@@ -21,13 +21,14 @@ public class ContactInsertValidation : AbstractValidator<Contact>
         RuleFor(c => c.PhoneNumber)
             .NotEmpty()
             .NotNull().WithMessage("O campo {PropertyName} é obrigatório.")
-            .Length(8, 9)
-            .WithMessage("O campo {PropertyName} precisa ser fornecido entre 8 e 9 dígitos.");
+            .Matches("^(?:((?:9\\d|[2-9])\\d{3})\\-?(\\d{4}))$")
+            .WithMessage("O campo {PropertyName} precisa ser valido.");
 
-        RuleFor(x => x.DDD).MustAsync( async (DDD, CancellationToken) =>
-        {
-            return await _regionRepository.Exists(x => x.DDD == DDD);
-        }).WithMessage("DDD inválido.");
+        RuleFor(c => c.DDD)
+            .NotEmpty()
+            .NotNull().WithMessage("O campo {PropertyName} é obrigatório.")
+            .Matches("^(?:\\(?([1-9][0-9])\\)?\\s?)$")
+            .WithMessage("DDD inválido."); ;
         #endregion
     }
 }

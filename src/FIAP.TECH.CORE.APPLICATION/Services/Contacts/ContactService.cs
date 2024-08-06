@@ -34,7 +34,11 @@ public class ContactService : IContactService
         if (results.Errors.Any())
             throw new ValidationException(results.Errors);
 
+        //valida regiao
         var region = await _regionRepository.Search(x => x.DDD == contact.DDD);
+        if (region == null)
+            throw new ValidationException("DDD inválido.");
+
         contact.RegionId = region!.Id;
 
         await _contactRepository.Create(contact);
