@@ -3,11 +3,14 @@ using FluentValidation;
 
 namespace FIAP.TECH.CORE.DOMAIN.Validation;
 
-public class ContactInsertValidation : AbstractValidator<Contact>
+public class ContactUpdateValidation : AbstractValidator<Contact>
 {
-    public ContactInsertValidation()
+    public ContactUpdateValidation()
     {
         #region Attributes
+        RuleFor(c => c.Id)
+            .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido.");
+
         RuleFor(c => c.Name)
             .NotEmpty()
             .WithMessage("O campo {PropertyName} precisa ser fornecido.");

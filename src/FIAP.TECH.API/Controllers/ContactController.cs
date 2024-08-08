@@ -31,12 +31,26 @@ public class ContactController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(ContactInsertDto contactDTO)
+    public async Task<IActionResult> Post([FromBody] ContactDto contactDTO)
     {
         try
         {
             await _contactService.Create(contactDTO);
             return Ok(new {message = "Contato criado com sucesso."});
+        }
+        catch (ValidationException vex)
+        {
+            return BadRequest(new { errors = vex.Errors.Select(e => e.ErrorMessage) });
+        }
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> Put([FromRoute] int id, [FromBody] ContactDto contactDTO)
+    {
+        try
+        {
+            await _contactService.Update(id, contactDTO);
+            return Ok(new { message = "Contato alterado com sucesso." });
         }
         catch (ValidationException vex)
         {
@@ -50,7 +64,7 @@ public class ContactController : ControllerBase
         try
         {
             await _contactService.Delete(id);
-            return Ok(new { message = "Contato deletado com sucesso." });
+            return Ok(new { message = "Contato removido com sucesso." });
         }
         catch (InvalidOperationException ex)
         {

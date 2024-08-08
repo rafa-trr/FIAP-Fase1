@@ -23,15 +23,15 @@ public class ContactService : IContactService
         _contactRepository = contactRepository;
     }
 
-    public async Task Create(ContactInsertDto contactInsertDTO)
+    public async Task Create(ContactDto contactInsertDTO)
     {
-        Contact contact = _mapper.Map<Contact>(contactInsertDTO);
+        var contact = _mapper.Map<Contact>(contactInsertDTO);
 
-        //Valida se os dados estao corretos
-        var resultValidation = new ContactInsertValidation(_regionRepository);
+        //Valida se os dados estão corretos
+        var resultValidation = new ContactInsertValidation();
         ValidationResult results = await resultValidation.ValidateAsync(contact);
 
-        if (results.Errors.Any())
+        if (results.Errors.Count != 0)
             throw new ValidationException(results.Errors);
 
         //valida regiao
@@ -42,6 +42,31 @@ public class ContactService : IContactService
         contact.RegionId = region!.Id;
 
         await _contactRepository.Create(contact);
+    }
+
+    public async Task Update(int id, ContactDto contactDTO)
+    {
+        var contact = await _contactRepository.GetById(id);
+        if (contact == null)
+            throw new ValidationException("Contato com ID informado não existe");
+
+        contact = _mapper.Map<Contact>(contactDTO);
+
+        //Valida se os dados estão corretos
+        var resultValidation = new ContactUpdateValidation();
+        ValidationResult results = await resultValidation.ValidateAsync(contact);
+
+        if (results.Errors.Count != 0)
+            throw new ValidationException(results.Errors);
+
+        //valida regiao
+        var region = await _regionRepository.Search(x => x.DDD == contact.DDD);
+        if (region == null)
+            throw new ValidationException("DDD inválido.");
+
+        contact.RegionId = region!.Id;
+
+        await _contactRepository.Update(contact);
     }
 
     public async Task Delete(int id)

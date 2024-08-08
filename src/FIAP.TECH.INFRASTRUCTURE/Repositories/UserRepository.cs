@@ -13,6 +13,6 @@ public class UserRepository : Repository<User>, IUserRepository
 
     public async Task<User?> Authenticate(string email, string password)
     {
-        return await _appDbContext.Users.SingleOrDefaultAsync(x => x.Email == email && x.Password == password && x.IsActive);
+        return await _appDbContext.Users.AsNoTracking().SingleOrDefaultAsync(x => x.Email == email && x.Password == password && x.IsActive);
     }
 }

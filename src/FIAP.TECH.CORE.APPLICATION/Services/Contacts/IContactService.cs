@@ -4,7 +4,8 @@ namespace FIAP.TECH.CORE.APPLICATION.Services.Contacts;
 
 public interface IContactService
 {
-    Task Create(ContactInsertDto contactInsertDTO);
+    Task Create(ContactDto contactDTO);
+    Task Update(int id, ContactDto contactDTO);
     Task Delete(int id);
     Task<IEnumerable<ContactDto>> GetAll();
     Task<ContactDto> GetById(int id);
