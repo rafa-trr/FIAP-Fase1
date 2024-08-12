@@ -1,6 +1,12 @@
-﻿using FIAP.TECH.CORE.DOMAIN.Validation;
+﻿using AutoMapper;
+using FIAP.TECH.CORE.APPLICATION.DTO;
+using FIAP.TECH.CORE.APPLICATION.Services.Contacts;
+using FIAP.TECH.CORE.DOMAIN.Interfaces.Repositories;
+using FIAP.TECH.CORE.DOMAIN.Validation;
 using FIAP.TECH.TESTS.Contacts.Setup;
 using FluentValidation.TestHelper;
+using Microsoft.AspNetCore.Mvc;
+using Moq;
 
 namespace FIAP.TECH.TESTS.Contacts.Unity;
 
@@ -75,4 +81,45 @@ public class ContactTests
         //Assert
         result.ShouldHaveAnyValidationError();
     }
+
+
+    //[Fact(DisplayName = "Validando a entrada de dados com erros esperados ao alterar um contato")]
+    //[Trait("Contato", "Validando Entrada de dados")]
+    //public async Task GetTweetDay_ReturnsOkResult_WithATweetObject()
+    //{
+    //    IMapper _mapper;
+    //    IRegionRepository _regionRepository;
+    //    IContactRepository _contactRepository
+
+    //    // Arrange
+    //    var mockRepo = new Mock<IRegionRepository>();
+    //    var mockRepo = new Mock<IRegionRepository>();
+
+    //    var mockRepo = new Mock<IRegionRepository>();
+
+    //    mockRepo.Setup(repo => repo.GetByDdd(""))
+    //        .ReturnsAsync(GetTestTweet(""));
+
+    //    var controller = new ContactService(mockRepo.Object);
+
+    //    // Act
+    //    var result = await controller.GetByDdd("11");
+
+    //    // Assert
+    //    var okResult = Assert.IsType<OkObjectResult>(result);
+    //}
+
+    //private List<ContactDetailsDto> GetTestTweet(string DDD)
+    //{
+    //    List<ContactDetailsDto> contacts = new List<ContactDetailsDto>();
+    //    contacts.Add(new ContactDetailsDto
+    //    {
+    //        Name = "Timotio",
+    //        DDD = "11",
+    //        Email = "_faker.Person.Email",
+    //        PhoneNumber = "_faker.Random.Replace("
+    //    });
+
+    //    return contacts.Where(x=>x.DDD == DDD).ToList();
+    //}
 }

@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FIAP.TECH.API\FIAP.TECH.API.csproj" />
     <ProjectReference Include="..\FIAP.TECH.CORE.APPLICATION\FIAP.TECH.CORE.APPLICATION.csproj" />
     <ProjectReference Include="..\FIAP.TECH.CORE.DOMAIN\FIAP.TECH.CORE.DOMAIN.csproj" />
   </ItemGroup>
