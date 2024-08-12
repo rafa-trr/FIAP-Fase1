@@ -8,9 +8,16 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<ContactDto, Contact>();
-        CreateMap<Contact, ContactDto>();
+        CreateMap<ContactDto, Contact>().ReverseMap();
         CreateMap<Contact, ContactDetailsDto>();
+        CreateMap<Contact, ContactUpdateDto>()
+            .ReverseMap()
+            .ForAllMembers(x => x.Condition(
+                   (src, dest, prop) =>
+                   {
+                       if (prop == null) return false;
+                       return true;
+                   }));
 
         CreateMap<Region, RegionDetailsDto>();
     }

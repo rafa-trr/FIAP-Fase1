@@ -79,7 +79,6 @@ public class ContactTests
         result.ShouldHaveAnyValidationError();
     }
 
-
     [Theory(DisplayName = "Retorna os contatos por DDD")]
     [Trait("Contato", "Retorna os contatos existentes")]
     [InlineData("11")]

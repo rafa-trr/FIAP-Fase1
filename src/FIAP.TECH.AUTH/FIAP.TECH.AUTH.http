@@ -1,6 +1,0 @@
-@FIAP.TECH.AUTH_HostAddress = http://localhost:5087
-
-GET {{FIAP.TECH.AUTH_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

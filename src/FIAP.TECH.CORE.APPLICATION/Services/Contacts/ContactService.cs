@@ -44,13 +44,13 @@ public class ContactService : IContactService
         await _contactRepository.Create(contact);
     }
 
-    public async Task Update(int id, ContactDto contactDTO)
+    public async Task Update(ContactUpdateDto contactDTO)
     {
-        var contact = await _contactRepository.GetById(id);
+        var contact = await _contactRepository.GetById(contactDTO.Id);
         if (contact == null)
             throw new ValidationException("Contato com ID informado não existe");
 
-        contact = _mapper.Map<Contact>(contactDTO);
+        contact = _mapper.Map(contactDTO, contact);
 
         //Valida se os dados estão corretos
         var resultValidation = new ContactUpdateValidation();

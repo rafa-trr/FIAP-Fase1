@@ -5,7 +5,7 @@ namespace FIAP.TECH.API.Configurations;
 
 public static class DbConfiguration
 {
-    public static void ConfigureDbContext(this IServiceCollection services)
+    public static void AddDbContextConfiguration(this IServiceCollection services)
     {
         var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 

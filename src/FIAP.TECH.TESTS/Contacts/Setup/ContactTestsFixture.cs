@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Bogus;
-using Bogus.DataSets;
 using FIAP.TECH.CORE.APPLICATION.Services.Contacts;
 using FIAP.TECH.CORE.DOMAIN.Entities;
 using FIAP.TECH.CORE.DOMAIN.Interfaces.Repositories;
@@ -94,8 +93,7 @@ public class ContactTestsFixture
             .RuleFor(p => p.Email, _faker.Person.Email)
             .RuleFor(p => p.PhoneNumber, _faker.Random.Replace("9#######"));
 
-
-        return contacts.Generate(5).Where(x => x.DDD == DDD).ToList();
+        return contacts.Generate(100).Where(x => x.DDD == DDD).ToList();
     }
 }
 

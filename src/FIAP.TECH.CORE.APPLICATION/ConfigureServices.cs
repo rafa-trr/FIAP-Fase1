@@ -23,9 +23,5 @@ public static class ConfigureServices
         // Services
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IContactService, ContactService>();
-
-        //AutoMapper
-        services.AddCustomAutoMapping(Configuration);
-
     }
 }
