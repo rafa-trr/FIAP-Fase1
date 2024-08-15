@@ -19,6 +19,7 @@ Execute o comando abaixo para criar o BD e as tabelas:
 
 ```powershell
 Update-Database
+```
 
 Execute o projeto através do IISExpress ou execute os comandos abaixo:
 
