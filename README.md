@@ -29,6 +29,7 @@ dotnet restore
 
 ```powershell
 dotnet clean
+```
 
 ```powershell
 dotnet run
