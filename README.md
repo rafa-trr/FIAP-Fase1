@@ -15,6 +15,11 @@ Senha: Senha@123
 [-] Faça clone do projeto:
 https://github.com/rafa-trr/FIAP-Fase1.git
 
+Execute o comando abaixo para criar o BD e as tabelas:
+
+```powershell
+dotnet restore
+
 Execute o projeto através do IISExpress ou execute os comandos abaixo:
 
 ```powershell
