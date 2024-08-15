@@ -1,6 +1,28 @@
+## 🎖️ Desafio
 API de gerenciamento de contatos proposto pela Fase 1 do curso de Arquitetura de Sistemas da FIAP
 
-Usuário e senha para realizar login na API e obter acesso aos métodos:
-
+## 🔑 Usuário e senha para realizar login na API e obter acesso aos métodos:
 Login: tester@fiaptest.com.br
 Senha: Senha@123
+
+## 🧪 Como testar o projeto
+
+### Antes de realizar os passos abaixo, é necessário instalar:
+- SDK .NET 8.0.x
+- Visual Studio 2022 ou VS Code
+- MS SQL LocalDB
+
+[-] Faça clone do projeto:
+https://github.com/rafa-trr/FIAP-Fase1.git
+
+Execute o projeto através do IISExpress ou execute os comandos abaixo:
+
+```powershell
+dotnet restore
+```
+
+```powershell
+dotnet clean
+
+```powershell
+dotnet run
