@@ -130,4 +130,10 @@ public class ContactController : ControllerBase
             return BadRequest(new { error = ex.Message });
         }
     }
+
+    [HttpGet]
+    public IActionResult Error()
+    {
+        return StatusCode(500);
+    }
 }
