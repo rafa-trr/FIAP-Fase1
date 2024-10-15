@@ -28,6 +28,7 @@ public class ContactController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
+        Task.Delay(5000).Wait();
         return Ok(await _contactService.GetAll());
     }
 
@@ -131,7 +132,7 @@ public class ContactController : ControllerBase
         }
     }
 
-    [HttpGet]
+    [HttpGet("erro")]
     public IActionResult Error()
     {
         return StatusCode(500);
