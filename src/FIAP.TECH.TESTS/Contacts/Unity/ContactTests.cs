@@ -1,25 +1,24 @@
 ﻿using FIAP.TECH.CORE.DOMAIN.Interfaces.Repositories;
 using FIAP.TECH.CORE.DOMAIN.Validation;
-using FIAP.TECH.TESTS.Contacts.Setup;
-using FluentAssertions;
 using FluentValidation.TestHelper;
 using Moq;
+using Xunit;
 
 namespace FIAP.TECH.TESTS.Contacts.Unity;
 
 [Collection(nameof(ContactFixtureCollection))]
 public class ContactTests
 {
-    private readonly ContactTestsFixture _contactTestsFixture;
     private ContactInsertValidation? _contactInsertValidation;
     private ContactUpdateValidation? _contactUpdateValidation;
+    private readonly ContactTestsFixture<Program> _contactTestsFixture;
 
-    public ContactTests(ContactTestsFixture contactTestsFixture)
+    public ContactTests(ContactTestsFixture<Program> contactTestsFixture)
     {
         _contactTestsFixture = contactTestsFixture;
     }
 
-    [Fact(DisplayName = "Validando a entrada de dados sem erros ao criar um contato")]
+    [Fact(DisplayName = "TESTE UNIDADE - Validando a entrada de dados sem erros ao criar um contato")]
     [Trait("Contato", "Validando Entrada de dados")]
     public void CreateContact_ValidateInput_NoErrors()
     {
@@ -34,7 +33,7 @@ public class ContactTests
         result.ShouldNotHaveAnyValidationErrors();
     }
 
-    [Fact(DisplayName = "Validando a entrada de dados com erros esperados ao criar um contato")]
+    [Fact(DisplayName = "TESTE UNIDADE - Validando a entrada de dados com erros esperados ao criar um contato")]
     [Trait("Contato", "Validando Entrada de dados")]
     public void CreateContact_ValidateInput_WithExpectedErrors()
     {
@@ -49,7 +48,7 @@ public class ContactTests
         result.ShouldHaveAnyValidationError();
     }
 
-    [Fact(DisplayName = "Validando a entrada de dados sem erros ao alterar um contato")]
+    [Fact(DisplayName = "TESTE UNIDADE - Validando a entrada de dados sem erros ao alterar um contato")]
     [Trait("Contato", "Validando Entrada de dados")]
     public void UpdateContact_ValidateInput_NoErrors()
     {
@@ -64,7 +63,7 @@ public class ContactTests
         result.ShouldNotHaveAnyValidationErrors();
     }
 
-    [Fact(DisplayName = "Validando a entrada de dados com erros esperados ao alterar um contato")]
+    [Fact(DisplayName = "TESTE UNIDADE - Validando a entrada de dados com erros esperados ao alterar um contato")]
     [Trait("Contato", "Validando Entrada de dados")]
     public void UpdateContact_ValidateInput_WithExpectedErrors()
     {
@@ -79,7 +78,7 @@ public class ContactTests
         result.ShouldHaveAnyValidationError();
     }
 
-    [Theory(DisplayName = "Retorna os contatos por DDD")]
+    [Theory(DisplayName = "TESTE UNIDADE - Retorna os contatos por DDD")]
     [Trait("Contato", "Retorna os contatos existentes")]
     [InlineData("11")]
     [InlineData("22")]
@@ -99,7 +98,7 @@ public class ContactTests
         Assert.NotEmpty(result);
     }
 
-    [Theory(DisplayName = "Lista deve Retornar vazia de contatos por DDD")]
+    [Theory(DisplayName = "TESTE UNIDADE - Lista deve Retornar vazia de contatos por DDD")]
     [Trait("Contato", "Lista deve retornar vazia")]
     [InlineData("00")]
     [InlineData("05")]

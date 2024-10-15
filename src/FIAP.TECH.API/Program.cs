@@ -43,3 +43,5 @@ app.MapControllers();
 app.UseHttpMetrics();
 
 app.Run();
+
+public partial class Program { }

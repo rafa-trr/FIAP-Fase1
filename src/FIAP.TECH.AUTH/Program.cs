@@ -43,3 +43,5 @@ app.MapPost("/login", [AllowAnonymous] async ([FromBody] AuthenticateRequest req
 .WithOpenApi();
 
 app.Run();
+
+public partial class ProgramAuth { }
